@@ -8,19 +8,28 @@ class MyService(rpyc.Service):
     def exposed_echo(self, text):
         print(text)
 
-    def exposed_soma(self, x, y):
-        print('Usaram o recurso de soma')
-        return int(x) + int(y)
+    def exposed_imc(self, peso, altura):
+        calculo = float(peso) / float(altura) *float(altura)
+        classificacao = ""
 
-    def exposed_subtracao(self, x, y):
-        return int(x) - int(y)
-
-    def exposed_cep(self, cep):
-        api = 'https://cep.awesomeapi.com.br/json'
+        if(calculo < 18,5):
+            classificacao = "Magreza"
+        elif(18,5 < calculo < 24,9):
+            classificacao = "Normal"
+        elif(25 < calculo < 29,9):
+            classificacao = "Sobrepeso"
+        elif(30  > calculo < 34,9):
+            classificacao = "Obesidade grau I"
+        elif(35 > calculo < 39,9):
+            classificacao = "Obesidade grau II"
+        elif(18,5 > calculo < 24,9):
+            classificacao = "Normal"
+        elif(18,5 > calculo < 24,9):
+            classificacao = "Normal"
+        elif(calculo > 40):
+            classificacao = "Obesidade grau III"
         
-        ret = rs.get(f'{api}/{cep}')
-        print('Usaram o recurso de CEP: ', cep)
-        return json.loads(ret.text)
+        return calculo, classificacao
 
 if __name__ == "__main__":
     server = ThreadedServer(MyService, hostname='0.0.0.0', port = 18812)
