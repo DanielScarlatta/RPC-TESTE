@@ -43,7 +43,7 @@ if options == 1:
 
   resposta = request.root.imc(peso, altura)
 
-  print("o imc do peso %.2f e altura %.2f é %.2f" %(peso, altura, resposta))
+  print("o imc do peso %.2f e altura %.2f é %.2f  \n Classificação: %s" %(peso, altura, resposta[0], resposta[1]))
 
 # chama a função de imprimir no servidor informa quem acessou
 
