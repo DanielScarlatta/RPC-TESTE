@@ -6,7 +6,7 @@ request = rpyc.connect("20.127.212.32", 18812)
 
 # leitura do teclado para as opções
 # options = int(input("1. Consultar CEP\n2. Somar\n3. Subtrair\nOpção: "))
-options = int(input("1. imc\nOpção: "))
+options = int(input("1. imc \n3. palindromo\nOpção: "))
 
 # if options == 1:
 #     cep = input("Informe o CEP: ")
@@ -38,14 +38,18 @@ options = int(input("1. imc\nOpção: "))
 #     print(f'A subtração entre {v1} e {v2} é: {returnCall}')
 
 if options == 1:
-  peso = float(input("Digite seu peso: "))
-  altura = float(input("Digite sua altura: "))
+  peso = float(input("Digite seu peso[Kg]: "))
+  altura = float(input("Digite sua altura[Metros]: "))
 
   resposta = request.root.imc(peso, altura)
 
-  print("o imc do peso %.2f e altura %.2f é %.2f  \n Classificação: %s" %(peso, altura, resposta[0], resposta[1]))
+  print("o IMC do peso %.2f e altura %.2f é %.2f kg/m2  \nClassificação: %s" %(peso, altura, resposta[0], resposta[1]))
 
-# chama a função de imprimir no servidor informa quem acessou
+if options == 3:
+  palavra = input("Digite uma palavra para verificar se é um palindromo: ")
 
-x = request.root.echo(['Daniel', 'aluno'])
-x
+  resposta = request.root.palindromo(palavra)
+
+  print(f"{resposta}")
+
+
