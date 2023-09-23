@@ -13,7 +13,7 @@ if options == 1:
     height = float(input("Digite sua altura [Metros]: "))
     response = request.root.imc(weight, height)
 
-    print(f"IMC para peso {weight:.2f} Kg e altura {height:.2f} M é {response[0]:.2f} kg/m2")
+    print(f"IMC para peso {weight:.2f} Kg e altura {height:.2f} é {response[0]:.2f} kg/m2")
     print(f"Classificação: {response[1]}")
 
 if options == 2:
@@ -27,6 +27,7 @@ if options == 2:
     print(f"Delta: {response[0]}")
     print(f"Primeira raiz: {response[1]}")
     print(f"Segunda raiz: {response[2]}")
+    print("Soluçao: s={%d, %d}" %(response[1], response[2]))
 
 if options == 3:
     # Opção para verificar se uma palavra é um palíndromo.
@@ -35,5 +36,3 @@ if options == 3:
     response = request.root.palindrome(word)
 
     print(response)
-
-

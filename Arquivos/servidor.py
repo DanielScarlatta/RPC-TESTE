@@ -10,25 +10,25 @@ class MyService(rpyc.Service):
 
     # Método exposto para calcular o Índice de Massa Corporal (IMC).
     def exposed_imc(self, weight, height):
-        calculo = float(weight) / (float(height) * float(height))
-        classificacao = ""  
+        calculation = float(weight) / (float(height) * float(height))
+        classification = ""  
 
         # Determina a classificação do IMC com base no valor calculado.
-        if calculo < 18.5:
-            classificacao = "Abaixo do peso"
-        elif 18.5 <= calculo < 24.9:
-            classificacao = "Peso normal"
-        elif 25 <= calculo < 29.9:
-            classificacao = "Sobrepeso"
-        elif 30 <= calculo < 34.9:
-            classificacao = "Obesidade Classe I"
-        elif 35 <= calculo < 39.9:
-            classificacao = "Obesidade Classe II"
-        elif calculo >= 40:
-            classificacao = "Obesidade Classe III"
+        if calculation < 18.5:
+            classification = "Abaixo do peso"
+        elif 18.5 <= calculation < 24.9:
+            classification = "Peso normal"
+        elif 25 <= calculation < 29.9:
+            classification = "Sobrepeso"
+        elif 30 <= calculation < 34.9:
+            classification = "Obesidade Classe I"
+        elif 35 <= calculation < 39.9:
+            classification = "Obesidade Classe II"
+        elif calculation >= 40:
+            classification = "Obesidade Classe III"
         
         # Retorna o valor do IMC e sua classificação.
-        return calculo, classificacao
+        return calculation, classification
     
     # Método exposto para resolver uma equação quadrática.
     def exposed_equation(self, a, b, c):
@@ -41,7 +41,7 @@ class MyService(rpyc.Service):
         # Retorna o valor do delta e as raízes.
         return delta, x1, x2
     
-    # Método exposto para verificar se a palavra é um palíndromo.
+    # Método exposto para verificar se uma palavra é um palíndromo.
     def exposed_palindrome(self, text):
         # Remove espaços em branco e converte a string para letras minúsculas.
         text = text.replace(" ", "").lower()
@@ -63,4 +63,3 @@ if __name__ == "__main__":
     print('Servidor online')
     # Inicia o servidor.
     server.start()
-
