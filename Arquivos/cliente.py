@@ -1,55 +1,39 @@
-# biblioteca RPC do Python
+# Importando a biblioteca RPyC para Python, que permite comunicação RPC.
 import rpyc
 
-# Chamada RPC para o Azure
+# Estabelecendo uma conexão RPC com o servidor usando o endereço IP e a porta.
 request = rpyc.connect("20.127.212.32", 18812)
 
-# leitura do teclado para as opções
-# options = int(input("1. Consultar CEP\n2. Somar\n3. Subtrair\nOpção: "))
-options = int(input("1. imc \n3. palindromo\nOpção: "))
-
-# if options == 1:
-#     cep = input("Informe o CEP: ")
-#     # executando a chamada remota RPC
-#     returnCall = request.root.cep(cep)
-
-#     # melhorar a saída do CEP
-#     endereco = returnCall['address']
-#     cidade = returnCall['city']
-#     estado = returnCall['state']
-#     bairro = returnCall['district']
-
-#     print(endereco)
-#     print(f'{cidade}/{estado}')
-#     print(bairro)
-
-# elif options == 2:  # elif é igual ao else if
-#     # soma entre dois valores
-#     v1 = int(input("Digite o valor 1: "))
-#     v2 = int(input("Digite o valor 2: "))
-#     returnCall = request.root.soma(v1, v2)
-#     print(f'A soma entre {v1} e {v2} é: {returnCall}')
-
-# elif options == 3:  # elif é igual ao else if
-#     # subtração entre dois valores
-#     v1 = int(input("Digite o valor 1: "))
-#     v2 = int(input("Digite o valor 2: "))
-#     returnCall = request.root.subtracao(v1, v2)
-#     print(f'A subtração entre {v1} e {v2} é: {returnCall}')
+# Solicitando que o usuário escolha uma opção.
+options = int(input("1. IMC (Índice de Massa Corporal)\n2. Equações do 2° grau\n3. Verificação de Palíndromo\nOpção: "))
 
 if options == 1:
-  peso = float(input("Digite seu peso[Kg]: "))
-  altura = float(input("Digite sua altura[Metros]: "))
+    # Opção para calcular o IMC (Índice de Massa Corporal).
+    weight = float(input("Digite seu peso [Kg]: "))
+    height = float(input("Digite sua altura [Metros]: "))
+    response = request.root.imc(weight, height)
 
-  resposta = request.root.imc(peso, altura)
+    print(f"IMC para peso {weight:.2f} Kg e altura {height:.2f} M é {response[0]:.2f} kg/m2")
+    print(f"Classificação: {response[1]}")
 
-  print("o IMC do peso %.2f e altura %.2f é %.2f kg/m2  \nClassificação: %s" %(peso, altura, resposta[0], resposta[1]))
+if options == 2:
+    # Opção para resolver uma equação quadrática.
+    a = int(input("Digite o coeficiente a: "))
+    b = int(input("Digite o coeficiente b: "))
+    c = int(input("Digite o coeficiente c: "))
+
+    response = request.root.equation(a, b, c)
+
+    print(f"Delta: {response[0]}")
+    print(f"Primeira raiz: {response[1]}")
+    print(f"Segunda raiz: {response[2]}")
 
 if options == 3:
-  palavra = input("Digite uma palavra para verificar se é um palindromo: ")
+    # Opção para verificar se uma palavra é um palíndromo.
+    word = input("Digite uma palavra para verificar se é um palíndromo: ")
 
-  resposta = request.root.palindromo(palavra)
+    response = request.root.palindrome(word)
 
-  print(f"{resposta}")
+    print(response)
 
 
